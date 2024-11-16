@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>買い物メモ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>買い物メモ</h1>
+        
+        <!-- 入力エリア -->
+        <div class="input-area">
+            <form id="memo-form">
+                <input 
+                    type="text" 
+                    id="memo-input" 
+                    placeholder="メモを入力"
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" id="submit-button">追加</button>
+            </form>
+        </div>
+
+        <!-- メモリスト -->
+        <div class="memo-list">
+            <ul id="memo-items">
+                <!-- JSで動的に追加される -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
