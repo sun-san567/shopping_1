@@ -1,170 +1,146 @@
-// _variables.scss
+// 変数
 $primary-color: #4CAF50;
+$secondary-color: #2196F3;
 $danger-color: #ff5252;
+$background-color: #f5f5f5;
 $text-color: #333;
 $border-color: #ddd;
-$background-color: #f7f7f7;
 
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 12px;
-$spacing-lg: 15px;
-$spacing-xl: 20px;
-
-$border-radius: 8px;
-$shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-$breakpoint-mobile: 480px;
-
-// _mixins.scss
-@mixin flex($justify: space-between, $align: center) {
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
-
-@mixin card {
-  background: white;
-  border-radius: $border-radius;
-  box-shadow: $shadow;
-}
-
+// ミックスイン
 @mixin button-base {
-  padding: $spacing-sm $spacing-md;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  color: white;
-  transition: background-color 0.2s ease;
-}
-
-// style.scss
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: $background-color;
-  color: $text-color;
-  line-height: 1.6;
-}
-
-.container {
-  max-width: 400px;
-  margin: $spacing-xl auto;
-  padding: $spacing-lg;
-
-  @media (max-width: $breakpoint-mobile) {
-    margin: $spacing-sm;
-  }
-}
-
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: $spacing-lg;
-  color: darken($text-color, 5%);
-}
-
-.input-area {
-  @include card;
-  padding: $spacing-lg;
-
-  form {
-    @include flex;
-    gap: $spacing-sm;
-  }
-
-  input[type="text"] {
-    flex-grow: 1;
-    padding: $spacing-sm $spacing-md;
-    border: 1px solid $border-color;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
     border-radius: 4px;
-    font-size: 16px;
-
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-      box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
-    }
-  }
-
-  button {
-    @include button-base;
-    background: $primary-color;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 100px;
 
     &:hover {
-      background: darken($primary-color, 5%);
+        transform: translateY(-1px);
     }
 
     &:active {
-      transform: translateY(1px);
+        transform: translateY(0);
     }
-  }
 }
 
-.memo-list {
-  @include card;
-  margin-top: $spacing-xl;
+// 基本スタイル
+.input-area {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 600px;
 
-  ul {
-    list-style: none;
-  }
-
-  li {
-    @include flex;
-    padding: $spacing-md $spacing-lg;
-    border-bottom: 1px solid lighten($border-color, 5%);
-
-    &:last-child {
-      border-bottom: none;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 500px
     }
 
-    .memo-text {
-      flex-grow: 1;
-      margin-right: $spacing-md;
+    input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: 16px;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        }
+    }
+}
+
+// ボタングループ
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+// ボタンスタイル
+.btn {
+    @include button-base;
+    
+    .btn-icon {
+        font-size: 18px;
+        line-height: 1;
+    }
+    
+    .btn-text {
+        font-size: 14px;
+    }
+    
+    &.btn-primary {
+        background: $primary-color;
+        color: white;
+        
+        &:hover {
+            background: darken($primary-color, 5%);
+            box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+        }
+    }
+    
+    &.btn-danger {
+        background: $danger-color;
+        color: white;
+        
+        &:hover {
+            background: darken($danger-color, 5%);
+            box-shadow: 0 2px 8px rgba($danger-color, 0.3);
+        }
+    }
+    
+    &.btn-secondary {
+        background: $secondary-color;
+        color: white;
+        
+        &:hover {
+            background: darken($secondary-color, 5%);
+            box-shadow: 0 2px 8px rgba($secondary-color, 0.3);
+        }
+    }
+}
+
+// レスポンシブ対応
+@media (max-width: 480px) {
+    .button-group {
+        flex-direction: column;
+        width: 100%;
     }
 
-    .delete-btn {
-      @include button-base;
-      background: $danger-color;
-      padding: $spacing-xs $spacing-sm;
-      font-size: 14px;
-
-      &:hover {
-        background: darken($danger-color, 5%);
-      }
+    .btn {
+        width: 100%;
+        justify-content: center;
     }
-  }
 }
 
 // アニメーション
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY($spacing-xs);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn {
+    &:hover {
+        animation: pulse 0.3s ease;
+    }
 }
 
-.fade-in {
-  animation: fadeIn 0.2s ease-out;
-}
-
-// ユーティリティクラス
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

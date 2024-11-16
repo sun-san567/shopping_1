@@ -8,7 +8,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>買い物メモ</h1>
+        <header class="header">
+            <h1>買い物メモ</h1>
+        </header>
         
         <!-- 入力エリア -->
         <div class="input-area">
@@ -20,8 +22,20 @@
                     autocomplete="off"
                     required
                 >
-                <button type="submit" id="submit-button">追加</button>
-                <button type="submit" id="remove-button">削除</button>
+                <div class="button-group">
+                    <button type="submit" id="submit-button" class="btn btn-primary">
+                        <span class="btn-icon">+</span>
+                        <span class="btn-text">追加</span>
+                    </button>
+                    <button type="button" id="remove-button" class="btn btn-danger">
+                        <span class="btn-icon">-</span>
+                        <span class="btn-text">削除</span>
+                    </button>
+                    <button type="button" id="download-csv" class="btn btn-secondary">
+                        <span class="btn-icon">↓</span>
+                        <span class="btn-text">CSV</span>
+                    </button>
+                </div>
             </form>
         </div>
 

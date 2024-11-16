@@ -92,7 +92,7 @@ function deleteMemo(index) {
 }
 
 if (remove) {
-    remove.addEventListener('click', function() {
+    remove.addEventListener('click', function () {
         // 配列が空でない場合のみ削除を実行
         if (memoArray.length > 0) {
             // 最後の要素を削除
@@ -101,4 +101,61 @@ if (remove) {
             console.log('現在のメモ:', memoArray);
         }
     });
+}
+
+// ここからは完全に生成
+
+// CSVダウンロード機能の実装
+function downloadCSV() {
+    // メモが空の場合は処理を中止
+    if (memoArray.length === 0) {
+        alert('ダウンロードできるメモがありません');
+        return;
+    }
+
+    try {
+        // CSVヘッダー
+        const headers = ['ID', 'メモ内容', '作成日時'];
+
+        // メモデータをCSV形式に変換
+        const csvData = memoArray.map(memo => {
+            return [
+                memo.id,
+                memo.text,
+                new Date(memo.createdAt).toLocaleString()
+            ].join(',');
+        });
+
+        // ヘッダーとデータを結合
+        const csvContent = [
+            headers.join(','),
+            ...csvData
+        ].join('\n');
+
+        // BOMを付加してエンコード（Excel対応）
+        const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+        const blob = new Blob([bom, csvContent], { type: 'text/csv;charset=utf-8' });
+
+        // ダウンロードリンクを作成
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `memo_list_${new Date().toISOString().slice(0, 10)}.csv`;
+
+        // リンクをクリックしてダウンロード
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        console.log('CSVダウンロードが完了しました');
+
+    } catch (error) {
+        console.error('CSVダウンロードに失敗しました:', error);
+        alert('ダウンロードに失敗しました');
+    }
+}
+
+// ダウンロードボタンのイベントリスナー
+const downloadButton = document.getElementById('download-csv');
+if (downloadButton) {
+    downloadButton.addEventListener('click', downloadCSV);
 }
