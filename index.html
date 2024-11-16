@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>買い物メモ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>買い物メモ</h1>
+        </header>
+        
+        <!-- 入力エリア -->
+        <div class="input-area">
+            <form id="memo-form">
+                <input 
+                    type="text" 
+                    id="memo-input" 
+                    placeholder="メモを入力"
+                    autocomplete="off"
+                    required
+                >
+                <div class="button-group">
+                    <button type="submit" id="submit-button" class="btn btn-primary">
+                        <span class="btn-icon">+</span>
+                        <span class="btn-text">追加</span>
+                    </button>
+                    <button type="button" id="remove-button" class="btn btn-danger">
+                        <span class="btn-icon">-</span>
+                        <span class="btn-text">削除</span>
+                    </button>
+                    <button type="button" id="download-csv" class="btn btn-secondary">
+                        <span class="btn-icon">↓</span>
+                        <span class="btn-text">CSV</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- メモリスト -->
+        <div class="memo-list">
+            <ul id="memo-items">
+                <!-- JSで動的に追加される -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
